@@ -1,8 +1,9 @@
 export class Chambre {
   //Variables privee
   #superficie = 10;
-  #nombre_de_personnes = 0;
+  #nombre_de_personnes = 1;
   #reservation = false;
+  static #nbChambre = 0;
 
   //Constructor
   /**
@@ -15,18 +16,19 @@ export class Chambre {
     this.#setSuperficie(superficie);
     this.#setNombreDePersonnes(nombre_de_personnes);
     this.#setReservation(reservation);
+    Chambre.#nbChambre++;
   }
 
   //Getters et Setters
   #setSuperficie(superficie) {
-    if (!isNaN(superficie) && superficie >= 0) this.#superficie = superficie;
-    else throw new Error(`${superficie} n'ete pas le Nombre ou < 0`);
+    if (!isNaN(superficie) && superficie > 0) this.#superficie = superficie;
+    else throw new Error(`${superficie} n'ete pas le Nombre ou <= 0`);
   }
 
   #setNombreDePersonnes(nombre_de_personnes) {
-    if (!isNaN(nombre_de_personnes) && nombre_de_personnes >= 0)
+    if (!isNaN(nombre_de_personnes) && nombre_de_personnes > 0)
       this.#nombre_de_personnes = nombre_de_personnes;
-    else throw new Error(`${nombre_de_personnes} n'ete pas le nombre ou < 0 `);
+    else throw new Error(`${nombre_de_personnes} n'ete pas le nombre ou <= 0 `);
   }
 
   #setReservation(reservation) {
@@ -45,13 +47,17 @@ export class Chambre {
     return this.#reservation;
   }
 
+  getNbChambre(){
+    return console.log(Chambre.#nbChambre);
+  }
+
   //Metodes
   reserverChambre() {
     if (!this.#reservation) {
       // this.#setReservation(true);
       console.log(`On peux reserver chambre No: `);
     } else {
-      console.log("Deja reserve!");
+      console.error("Deja reserve!");
     }
     // let reserver = this.#reservation == false;
     // this.#reservation = reserver ? this.setReservation(true) : console.log("ERROR");
@@ -62,7 +68,7 @@ export class Chambre {
       // this.#setReservation(false);
       console.log(`On peux librer chambre No: `);
     } else {
-      console.log("Deja libre!");
+      console.error("Deja libre!");
     }
     // let reserver = this.#reservation == true;
     // this.#reservation = reserver

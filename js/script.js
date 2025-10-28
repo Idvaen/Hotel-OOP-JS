@@ -2,12 +2,17 @@ import { Chambre } from "./Chambre.js";
 
 let hotel = [];
 
-for (let i = 0; i < 10; i++) {
-  hotel[i] = new Chambre(
-    Math.floor(Math.random() * 100),
-    Math.floor(Math.random() * 6),
-    Math.floor(Math.random() * 2) == 1
-  );
+try {
+  for (let i = 0; i < 10; i++) {
+    hotel[i] = new Chambre(
+      Math.floor(Math.random() * 149 + 1),
+      Math.floor(Math.random() * 5 + 1),
+      Math.floor(Math.random() * 2) == 1
+    );
+    hotel[i].getNbChambre();
+  }
+} catch (error) {
+  console.error(error.meassage);
 }
 
 console.log(hotel);
@@ -17,7 +22,7 @@ testerHotelLiberation();
 function testerHotelReservation() {
   for (let chambre in hotel) {
     hotel[chambre].reserverChambre();
-    console.log(parseInt(chambre)+1);
+    console.log(parseInt(chambre) + 1);
   }
   console.log("\n\n\n");
 }
@@ -29,7 +34,7 @@ function testerHotelReservation() {
 function testerHotelLiberation() {
   for (let chambre in hotel) {
     hotel[chambre].libererChambre();
-    console.log(parseInt(chambre)+1)
+    console.log(parseInt(chambre) + 1);
   }
   console.log("\n\n\n");
 }
